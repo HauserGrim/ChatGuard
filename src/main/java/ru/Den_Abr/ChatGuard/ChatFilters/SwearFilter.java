@@ -165,7 +165,6 @@ public class SwearFilter extends AbstractFilter {
 			return;
 		}
 
-		addMetricsGraph();
 		getActiveFilters().add(this);
 		return;
 	}

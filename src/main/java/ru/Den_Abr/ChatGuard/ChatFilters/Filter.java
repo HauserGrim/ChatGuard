@@ -1,8 +1,5 @@
 package ru.Den_Abr.ChatGuard.ChatFilters;
 
-import org.bstats.bukkit.Metrics;
-
-import ru.Den_Abr.ChatGuard.ChatGuardPlugin;
 import ru.Den_Abr.ChatGuard.Violation;
 import ru.Den_Abr.ChatGuard.Player.CGPlayer;
 
@@ -18,11 +15,4 @@ public interface Filter {
     public int getMaxWarnings();
 
     public void register();
-
-    default void addMetricsGraph() {
-        if (ChatGuardPlugin.metrics.isEnabled())
-            ChatGuardPlugin.metrics.addCustomChart(
-                    new Metrics.SimplePie("filters_used", () -> getClass().getSimpleName().replace("Filter", "")));
-    }
-
 }

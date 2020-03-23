@@ -3,7 +3,7 @@ main: ru.Den_Abr.ChatGuard.ChatGuardPlugin
 version: ${version}
 author: Den_Abr
 description: Guard for your chat
-softdepend: [ProtocolLib, AuthMe, NoCheatPlus]
+softdepend: [ProtocolLib, AuthMe]
 commands:
     cg:
        description: ChatGuard commands.

@@ -147,8 +147,6 @@ public class SpamFilter extends AbstractFilter {
 		maxNums = cs.getInt("max numbers");
 		replacement = ChatColor.translateAlternateColorCodes('&', cs.getString("custom replacement"));
 
-		addMetricsGraph();
-
 		getActiveFilters().add(this);
 		return;
 	}

@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,19 +25,17 @@ public class PlayerListener implements Listener {
     private static PlayerListener instance;
     public static boolean globalMute = false;
 
+
     public PlayerListener() {
         instance = this;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
-        e.setMessage(substitute(e.getMessage()));
-
         MessageInfo info = handleMessage(e.getMessage(), CGPlayer.get(e.getPlayer()));
-        if (info == null)
-            return;
-        if (info.isCancelled())
+        if (info.isCancelled() || e.isCancelled())
             e.setCancelled(true);
+        e.setMessage(substitute(e.getMessage()));
         e.setMessage(info.getClearMessage());
     }
 
@@ -80,6 +79,10 @@ public class PlayerListener implements Listener {
                                     Utils.getTimeInMaxUnit(player.getMuteTime() - System.currentTimeMillis())));
             info.cancel(true);
             return info;
+        }
+        // TODO ess
+        if (Bukkit.getPluginManager().getPlugin("Essentials") != null) {
+            
         }
 
         if (!player.hasPermission("chatguard.ignore.cooldown")) {

@@ -24,7 +24,7 @@ public abstract class AbstractFilter implements Filter {
 			if (!isChat && (f.getClass().equals(FloodFilter.class) || f.getClass().equals(CapsFilter.class)))
 				continue;
 
-			Violation v = f.checkMessage(info.getOriginalMessage(), player);
+			Violation v = f.checkMessage(info.getOriginalMessage(), player, isChat);
 			if (v != null) {
 				copy = f.getClearMessage(copy, player);
 				ChatGuardPlugin.debug(1, "Clear message after " + f.getClass().getSimpleName() + ": " + copy);

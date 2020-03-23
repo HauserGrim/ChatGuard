@@ -75,7 +75,6 @@ public class FloodFilter extends AbstractFilter {
 
 		floodTime = cs.getInt("flood time");
 		levels = cs.getInt("flood levels");
-		addMetricsGraph();
 		getActiveFilters().add(this);
 	}
 

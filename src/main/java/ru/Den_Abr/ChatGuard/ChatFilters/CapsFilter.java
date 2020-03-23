@@ -70,7 +70,6 @@ public class CapsFilter extends AbstractFilter {
 
 		maxCapsPercent = cs.getInt("max caps percent");
 		minLenght = cs.getInt("min message lenght");
-		addMetricsGraph();
 		getActiveFilters().add(this);
 	}
 

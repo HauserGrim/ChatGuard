@@ -2,7 +2,6 @@ package ru.Den_Abr.ChatGuard;
 
 import java.util.logging.Logger;
 
-import org.bstats.bukkit.Metrics;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventException;
@@ -25,7 +24,6 @@ import ru.Den_Abr.ChatGuard.Configuration.Settings;
 import ru.Den_Abr.ChatGuard.Configuration.Whitelist;
 import ru.Den_Abr.ChatGuard.Integration.AbstractIntegration;
 import ru.Den_Abr.ChatGuard.Integration.AuthMe;
-import ru.Den_Abr.ChatGuard.Integration.NoCheatPlus;
 import ru.Den_Abr.ChatGuard.Listeners.FallbackCommandsListener;
 import ru.Den_Abr.ChatGuard.Listeners.ItemListener;
 import ru.Den_Abr.ChatGuard.Listeners.PacketsListener;
@@ -36,7 +34,6 @@ import ru.Den_Abr.ChatGuard.Utils.Utils;
 
 public class ChatGuardPlugin extends JavaPlugin {
     private static ChatGuardPlugin instance;
-    public static Metrics metrics;
 
     @Override
     public void onEnable() {
@@ -49,7 +46,6 @@ public class ChatGuardPlugin extends JavaPlugin {
         Whitelist.load(this);
         ItemListener.scheduleChecks();
 
-        initMetrics();
         if (!setupProtocol()) {
             final PlayerListener listener = new PlayerListener();
             EventExecutor exec = new EventExecutor() {
@@ -89,7 +85,6 @@ public class ChatGuardPlugin extends JavaPlugin {
 
         // you can do it from your's plugins
         new AuthMe().register();
-        new NoCheatPlus().register();
     }
 
     // the same as integration
@@ -101,10 +96,6 @@ public class ChatGuardPlugin extends JavaPlugin {
         new CapsFilter().register();
         new SpamFilter().register();
         new SwearFilter().register();
-    }
-
-    private void initMetrics() {
-        metrics = new Metrics(this);
     }
 
     public static ChatGuardPlugin getInstance() {

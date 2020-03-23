@@ -63,7 +63,6 @@ public class CharacterFilter extends AbstractFilter {
 				}
 			}
 			charSet = Files.readFirstLine(fCh, Charset.forName("UTF-8"));
-			addMetricsGraph();
 
 			getActiveFilters().add(this);
 		} catch (IOException e) {
