@@ -17,14 +17,15 @@ public abstract class AbstractFilter implements Filter {
 		return activeFilters;
 	}
 
-	public static MessageInfo handleMessage(String mes, CGPlayer player, boolean isChat) {
+	@SuppressWarnings("deprecation")
+    public static MessageInfo handleMessage(String mes, CGPlayer player, boolean isChat) {
 		MessageInfo info = new MessageInfo(mes, player);
 		String copy = info.getOriginalMessage();
 		for (Filter f : getActiveFilters()) {
 			if (!isChat && (f.getClass().equals(FloodFilter.class) || f.getClass().equals(CapsFilter.class)))
 				continue;
 
-			Violation v = f.checkMessage(info.getOriginalMessage(), player, isChat);
+            Violation v = f.checkMessage(info.getOriginalMessage(), player);
 			if (v != null) {
 				copy = f.getClearMessage(copy, player);
 				ChatGuardPlugin.debug(1, "Clear message after " + f.getClass().getSimpleName() + ": " + copy);
